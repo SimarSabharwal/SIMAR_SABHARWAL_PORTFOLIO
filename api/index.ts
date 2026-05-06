@@ -4,8 +4,9 @@ import path from 'path';
 const app = express();
 
 // Serve static files from the public directory
-// On Vercel, process.cwd() is the root of the project
-const publicPath = path.join(process.cwd(), 'public');
+// On Vercel, we check multiple common locations to be safe
+const publicPath = path.resolve(process.cwd(), 'public');
+console.log('Public Path:', publicPath);
 
 app.use(express.static(publicPath, {
   extensions: ['html'],
