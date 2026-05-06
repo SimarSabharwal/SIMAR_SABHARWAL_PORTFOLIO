@@ -4,15 +4,12 @@
   "description": "Simar Sabharwal — Full-Stack Developer & Creative Designer Portfolio",
   "scripts": {
     "build": "npm run build:client",
-    "build:client": "esbuild src/client/app.ts --bundle --outfile=js/app.js --target=es2020 --format=iife",
-    "dev": "esbuild src/client/app.ts --bundle --outfile=js/app.js --target=es2020 --format=iife --watch"
+    "build:client": "esbuild src/client/app.ts --bundle --outfile=public/js/app.js --target=es2020 --format=iife",
+    "dev": "esbuild src/client/app.ts --bundle --outfile=public/js/app.js --target=es2020 --format=iife --watch"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "esbuild": "^0.24.0",
     "typescript": "^5.6.0"
-  },
-  "dependencies": {
-    "express": "^5.2.1"
   }
 }
