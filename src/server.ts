@@ -5,7 +5,8 @@ const app = express();
 const PORT: number = parseInt(process.env.PORT || '3000', 10);
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, '..', 'public'), {
+const publicPath = path.join(process.cwd(), 'public');
+app.use(express.static(publicPath, {
   extensions: ['html'],
   maxAge: 0,
   setHeaders: (res) => {
@@ -25,15 +26,17 @@ app.get('/api/health', (_req: Request, res: Response) => {
 
 // Catch-all: serve index.html for SPA routing
 app.get('*', (_req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`\n  ⚡ SIMAR PORTFOLIO SERVER`);
-  console.log(`  ─────────────────────────`);
-  console.log(`  🌐 Local:   http://localhost:${PORT}`);
-  console.log(`  📦 Static:  /public`);
-  console.log(`  🚀 Status:  Ready\n`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`\n  ⚡ SIMAR PORTFOLIO SERVER`);
+    console.log(`  ─────────────────────────`);
+    console.log(`  🌐 Local:   http://localhost:${PORT}`);
+    console.log(`  📦 Static:  /public`);
+    console.log(`  🚀 Status:  Ready\n`);
+  });
+}
 
 export default app;
