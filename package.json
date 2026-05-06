@@ -1,7 +1,7 @@
 {
   "name": "simar-portfolio",
   "version": "1.0.0",
-  "description": "Simar Sabharwal — Full-Stack Developer Portfolio",
+  "description": "Simar Sabharwal — Full-Stack Developer & Creative Designer Portfolio",
   "main": "dist/server.js",
   "scripts": {
     "build:client": "esbuild src/client/app.ts --bundle --outfile=public/js/app.js --target=es2020 --format=iife",
