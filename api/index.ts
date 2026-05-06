@@ -4,9 +4,10 @@ import path from 'path';
 const app = express();
 
 // Serve static files from the public directory
-// On Vercel, we check multiple common locations to be safe
 const publicPath = path.resolve(process.cwd(), 'public');
-console.log('Public Path:', publicPath);
+console.log('Current working directory:', process.cwd());
+console.log('Public Path resolved:', publicPath);
+console.log('Directory name:', __dirname);
 
 app.use(express.static(publicPath, {
   extensions: ['html'],
@@ -28,7 +29,13 @@ app.get('/api/health', (_req: Request, res: Response) => {
 
 // Catch-all: serve index.html for SPA routing
 app.get('*', (_req: Request, res: Response) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  const indexPath = path.join(publicPath, 'index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error('Error sending file:', err);
+      res.status(500).send('Critical Error: index.html not found. Path attempted: ' + indexPath);
+    }
+  });
 });
 
 // Export for Vercel
